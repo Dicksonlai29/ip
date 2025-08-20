@@ -1,10 +1,31 @@
-public class Duke {
+import java.util.Scanner;
+
+public class NUSYapBot {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String welcome = """
+                         ________________________________
+                         Hello! I'm NUSYapBot!
+                         What can I do for you?
+                        _________________________________
+                        
+                         """;
+
+        String end = """
+                        Goodbye. See you!
+                        _________________________________
+                     """;
+        System.out.println(welcome);
+        boolean flag = true;
+        while (flag) {
+            Scanner input = new Scanner(System.in);
+            String answer = input.nextLine();
+            if (!answer.equals("bye")) {
+                System.out.println("> " + answer);
+            } else {
+                flag = false;
+            }
+        }
+
+        System.out.println(end);
     }
 }
