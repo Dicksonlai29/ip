@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class NUSYapBot {
 
-    public static void PrintAddTaskMessage(Task[] taskList, int pointer){
+    public static void printAddTaskMessage(Task[] taskList, int pointer){
         System.out.println( "_________________________________" + "\n" +
                 "Got it. I've added this task: " +
                 taskList[pointer-1] + "\n" +
@@ -45,68 +45,31 @@ public class NUSYapBot {
                 flag = false;
                 System.out.println(end);
 
-            } else if (answer.startsWith("todo")) {
-                //create ToDo object
-                String taskTitle = answer.substring(5);
-                taskList[pointer] = new ToDo(taskTitle);
-                pointer++;
-
-                PrintAddTaskMessage(taskList,pointer);
-
-
-            } else if (answer.startsWith("deadline")) {
-                //create Deadline object
-                int indexOfBy = answer.indexOf("/by");
-                int indexOfDeadline = indexOfBy + 4;
-                String taskTitle = answer.substring(9, indexOfBy-1);
-                String deadline = answer.substring(indexOfDeadline);
-                taskList[pointer] = new Deadline(taskTitle, deadline);
-                pointer++;
-
-                PrintAddTaskMessage(taskList,pointer);
-
-            } else if (answer.startsWith("event")) {
-                //create Event object
-                int indexOfFrom = answer.indexOf("/from");
-                int indexOfStartDate = indexOfFrom + 6;
-
-                int indexOfTo = answer.indexOf("/to");
-                int indexOfEndDate = indexOfTo + 4;
-
-                String taskTitle = answer.substring(6, indexOfFrom-1);
-                String startDate = answer.substring(indexOfStartDate, indexOfTo);
-                String endDate = answer.substring(indexOfEndDate);
-                taskList[pointer] = new Event(taskTitle, startDate, endDate);
-                pointer++;
-
-                PrintAddTaskMessage(taskList,pointer);
-
             } else if (answer.startsWith("mark")) {
-                int taskNum = Integer.parseInt(answer.split(" ")[1]) - 1;
-                String taskTitle = taskList[taskNum].getTitle();
-                taskList[taskNum].setIsCompleted(true);
-                System.out.println( "_________________________________" + "\n" +
-                                    "Nice! I've marked this task as done:" + "\n" + "[X] " +
-                                    taskTitle + "\n" +
-                                    "_________________________________");
+                try {
+                    CommandHandler.markTask(taskList, answer, true);
+                } catch (LackingInputException | MarkingException e) {
+                    System.out.println(e);
+                }
+
             } else if (answer.startsWith("unmark")) {
-                int taskNum = Integer.parseInt(answer.split(" ")[1]) - 1;
-                String taskTitle = taskList[taskNum].getTitle();
-                taskList[taskNum].setIsCompleted(false);
-                System.out.println( "_________________________________" + "\n" +
-                        "OK, I've marked this task as not done yet:" + "\n" + "[ ] " +
-                        taskTitle + "\n" +
-                        "_________________________________");
+                try {
+                    CommandHandler.markTask(taskList, answer, false);
+                } catch (LackingInputException | MarkingException e) {
+                System.out.println(e);
             }
-//            else {
-//                    System.out.println("_________________________________" + "\n" +
-//                                       "added: " + answer + "\n" +
-//                                       "_________________________________");
-//                    //create new Task object
-//                    taskList[pointer] = new Task(answer);
-//                    pointer++;
-//
-//            }
+            }
+            else {
+                try {
+                    Task newTask = CommandHandler.createTask(answer);
+                    taskList[pointer] = newTask;
+                    pointer++;
+                    printAddTaskMessage(taskList, pointer);
+                } catch (LackingInputException | UnrecognisedCommandException e) {
+                    System.out.println(e);
+                }
+
+            }
         }
     }
 }
