@@ -4,40 +4,50 @@
 _________________________________
 
 _________________________________
-Got it. I've added this task: [T][ ] borrow book
+Got it. I've added this task: [T][ ] read book
 Now you have 1 tasks in the list.
 _________________________________
 _________________________________
-Got it. I've added this task: [E][ ] Korean Class (from: 21 Aug 2pm to: 4pm)
+Got it. I've added this task: [D][ ] complete Task 1 (by: 26 Aug)
 Now you have 2 tasks in the list.
 _________________________________
 _________________________________
-Got it. I've added this task: [D][ ] Submit HW1 (by: 23Aug)
+Got it. I've added this task: [E][ ] conference (from: 2pm to: 4pm)
 Now you have 3 tasks in the list.
 _________________________________
 _________________________________
-1. [T][ ] borrow book
-2. [E][ ] Korean Class (from: 21 Aug 2pm to: 4pm)
-3. [D][ ] Submit HW1 (by: 23Aug)
+Got it. I've added this task: [D][ ] submit hw1 (by: 22 Aug)
+Now you have 4 tasks in the list.
+_________________________________
+_________________________________
+Got it. I've added this task: [T][ ] get laundry
+Now you have 5 tasks in the list.
+_________________________________
+_________________________________
+1. [T][ ] read book
+2. [D][ ] complete Task 1 (by: 26 Aug)
+3. [E][ ] conference (from: 2pm to: 4pm)
+4. [D][ ] submit hw1 (by: 22 Aug)
+5. [T][ ] get laundry
 _________________________________
 _________________________________
 Nice! I've marked this task as done:
-[X] borrow book
+[T][X] read book
 _________________________________
 _________________________________
 Nice! I've marked this task as done:
-[X] Korean Class
+[D][X] complete Task 1 (by: 26 Aug)
 _________________________________
 _________________________________
 OK, I've marked this task as not done yet:
-[ ] Korean Class
+[T][ ] read book
 _________________________________
-_________________________________
-1. [T][X] borrow book
-2. [E][ ] Korean Class (from: 21 Aug 2pm to: 4pm)
-3. [D][ ] Submit HW1 (by: 23Aug)
-_________________________________
-_________________________________
-Goodbye. See you!
-_________________________________
-
+NUSYapBot ran into error: Sorry, that task doesn't exist. Please try again.
+NUSYapBot ran into error: Sorry, I'm not too sure what you mean by that... Please try again.
+NUSYapBot ran into error: Sorry, I'm not too sure what you mean by that... Please try again.
+NUSYapBot ran into error: start time cannot be left empty. 
+Action failed.
+NUSYapBot ran into error: deadline cannot be left empty. 
+Action failed.
+NUSYapBot ran into error: task number cannot be left empty. 
+Action failed.

@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NUSYapBot {
 
-    public static void printAddTaskMessage(Task[] taskList, int pointer){
+    public static void printAddTaskMessage(ArrayList<Task> taskList, int pointer){
         System.out.println( "_________________________________" + "\n" +
                 "Got it. I've added this task: " +
-                taskList[pointer-1] + "\n" +
+                taskList.get(pointer - 1) + "\n" +
                 "Now you have "+ pointer +" tasks in the list." + "\n" +
                 "_________________________________");
     };
@@ -25,7 +26,7 @@ public class NUSYapBot {
                      """;
         System.out.println(welcome);
         boolean flag = true;
-        Task[] taskList = new Task[100];
+        ArrayList<Task> taskList = new ArrayList<>();
         int pointer = 0;
         Scanner input = new Scanner(System.in);
 
@@ -33,12 +34,9 @@ public class NUSYapBot {
             String answer = input.nextLine();
 
             if (answer.equals("list")) {
-                int i = 0;
                 System.out.println("_________________________________");
-                while (taskList[i] != null) {
-
-                    System.out.println( i + 1 + ". " + taskList[i]);
-                    i++;
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println( i + 1 + ". " + taskList.get(i));
                 }
                 System.out.println("_________________________________");
             } else if (answer.equals("bye")) {
@@ -48,21 +46,29 @@ public class NUSYapBot {
             } else if (answer.startsWith("mark")) {
                 try {
                     CommandHandler.markTask(taskList, answer, true);
-                } catch (LackingInputException | MarkingException e) {
+                } catch (LackingInputException | InvalidTaskException e) {
                     System.out.println(e);
                 }
 
             } else if (answer.startsWith("unmark")) {
                 try {
                     CommandHandler.markTask(taskList, answer, false);
-                } catch (LackingInputException | MarkingException e) {
-                System.out.println(e);
+                } catch (LackingInputException | InvalidTaskException e) {
+                    System.out.println(e);
+                }
+            } else if (answer.startsWith("delete")) {
+                try {
+                    CommandHandler.delete(taskList, answer, pointer);
+                    pointer--;
+                } catch (LackingInputException | InvalidTaskException e) {
+                    System.out.println(e);
+                }
             }
-            }
+
             else {
                 try {
                     Task newTask = CommandHandler.createTask(answer);
-                    taskList[pointer] = newTask;
+                    taskList.add(newTask);
                     pointer++;
                     printAddTaskMessage(taskList, pointer);
                 } catch (LackingInputException | UnrecognisedCommandException e) {

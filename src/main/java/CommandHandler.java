@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class CommandHandler {
     public static Task createTask(String answer) throws LackingInputException, UnrecognisedCommandException {
 
@@ -54,7 +56,7 @@ public class CommandHandler {
             throw new UnrecognisedCommandException();
         }
     }
-    public static void markTask(Task[] taskList, String answer, boolean status) throws LackingInputException, MarkingException {
+    public static void delete(ArrayList<Task> taskList, String answer, int pointer) throws LackingInputException, InvalidTaskException {
         String[] parts = answer.split(" ");
         if (parts.length < 2) {
             throw new LackingInputException("task number");
@@ -62,18 +64,38 @@ public class CommandHandler {
 
         try {
             int taskNum = Integer.parseInt(parts[1]) - 1;
-            taskList[taskNum].setIsCompleted(status);
-            String message = status
-                    ? "Nice! I've marked this task as done:"
-                    : "OK, I've marked this task as not done yet:";
+            Task delTask = taskList.get(taskNum);
+            taskList.remove(taskNum);
 
-            System.out.println( "_________________________________" + "\n" +
-                    message + "\n" +
-                    taskList[taskNum] + "\n" +
+            System.out.println("_________________________________" + "\n" +
+                    "Noted. I've removed this task:\n" +
+                    delTask + "\n" +
+                    "Now you have " + (pointer - 1) + "tasks in the list.\n" +
                     "_________________________________");
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
-            throw new MarkingException();
+            throw new InvalidTaskException();
         }
+    }
+        public static void markTask(ArrayList<Task> taskList, String answer, boolean status) throws LackingInputException, InvalidTaskException {
+            String[] parts = answer.split(" ");
+            if (parts.length < 2) {
+                throw new LackingInputException("task number");
+            }
+
+            try {
+                int taskNum = Integer.parseInt(parts[1]) - 1;
+                taskList.get(taskNum).setIsCompleted(status);
+                String message = status
+                        ? "Nice! I've marked this task as done:"
+                        : "OK, I've marked this task as not done yet:";
+
+                System.out.println( "_________________________________" + "\n" +
+                        message + "\n" +
+                        taskList.get(taskNum) + "\n" +
+                        "_________________________________");
+            } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
+                throw new InvalidTaskException();
+            }
 
     }
 
