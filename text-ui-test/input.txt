@@ -1,0 +1,9 @@
+todo borrow book
+event Korean Class /from 21 Aug 2pm /to 4pm
+deadline Submit HW1 /by 23Aug
+list
+mark 1
+mark 2
+unmark 2
+list
+bye

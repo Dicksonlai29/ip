@@ -16,7 +16,7 @@ public class NUSYapBot {
                          Hello! I'm NUSYapBot!
                          What can I do for you?
                         _________________________________
-                         """;
+                        """;
 
         String end = """
                      _________________________________
@@ -27,11 +27,9 @@ public class NUSYapBot {
         boolean flag = true;
         Task[] taskList = new Task[100];
         int pointer = 0;
-
-
+        Scanner input = new Scanner(System.in);
 
         while (flag) {
-            Scanner input = new Scanner(System.in);
             String answer = input.nextLine();
 
             if (answer.equals("list")) {
@@ -60,7 +58,7 @@ public class NUSYapBot {
                 //create Deadline object
                 int indexOfBy = answer.indexOf("/by");
                 int indexOfDeadline = indexOfBy + 4;
-                String taskTitle = answer.substring(9, indexOfBy);
+                String taskTitle = answer.substring(9, indexOfBy-1);
                 String deadline = answer.substring(indexOfDeadline);
                 taskList[pointer] = new Deadline(taskTitle, deadline);
                 pointer++;
@@ -75,7 +73,7 @@ public class NUSYapBot {
                 int indexOfTo = answer.indexOf("/to");
                 int indexOfEndDate = indexOfTo + 4;
 
-                String taskTitle = answer.substring(6, indexOfFrom);
+                String taskTitle = answer.substring(6, indexOfFrom-1);
                 String startDate = answer.substring(indexOfStartDate, indexOfTo);
                 String endDate = answer.substring(indexOfEndDate);
                 taskList[pointer] = new Event(taskTitle, startDate, endDate);
@@ -96,7 +94,7 @@ public class NUSYapBot {
                 String taskTitle = taskList[taskNum].getTitle();
                 taskList[taskNum].setIsCompleted(false);
                 System.out.println( "_________________________________" + "\n" +
-                        "Nice! I've marked this task as not done yet:" + "\n" + "[ ] " +
+                        "OK, I've marked this task as not done yet:" + "\n" + "[ ] " +
                         taskTitle + "\n" +
                         "_________________________________");
             }

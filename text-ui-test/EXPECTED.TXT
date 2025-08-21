@@ -1,7 +1,43 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+ ________________________________
+ Hello! I'm NUSYapBot!
+ What can I do for you?
+_________________________________
+
+_________________________________
+Got it. I've added this task: [T][ ] borrow book
+Now you have 1 tasks in the list.
+_________________________________
+_________________________________
+Got it. I've added this task: [E][ ] Korean Class (from: 21 Aug 2pm to: 4pm)
+Now you have 2 tasks in the list.
+_________________________________
+_________________________________
+Got it. I've added this task: [D][ ] Submit HW1 (by: 23Aug)
+Now you have 3 tasks in the list.
+_________________________________
+_________________________________
+1. [T][ ] borrow book
+2. [E][ ] Korean Class (from: 21 Aug 2pm to: 4pm)
+3. [D][ ] Submit HW1 (by: 23Aug)
+_________________________________
+_________________________________
+Nice! I've marked this task as done:
+[X] borrow book
+_________________________________
+_________________________________
+Nice! I've marked this task as done:
+[X] Korean Class
+_________________________________
+_________________________________
+OK, I've marked this task as not done yet:
+[ ] Korean Class
+_________________________________
+_________________________________
+1. [T][X] borrow book
+2. [E][ ] Korean Class (from: 21 Aug 2pm to: 4pm)
+3. [D][ ] Submit HW1 (by: 23Aug)
+_________________________________
+_________________________________
+Goodbye. See you!
+_________________________________
 
