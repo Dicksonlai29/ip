@@ -1,25 +1,27 @@
-public class Deadline extends Task {
-    private String deadline;
+import java.time.LocalDateTime;
 
-    public Deadline(String task, String deadline) {
+public class Deadline extends Task {
+    private LocalDateTime deadline;
+
+    public Deadline(String task, LocalDateTime deadline) {
         super(task);
         this.deadline = deadline;
         this.setType('D');
        
     }
 
-    public Deadline(String task, String deadline, boolean isCompleted) {
+    public Deadline(String task, LocalDateTime deadline, boolean isCompleted) {
         super(task);
         this.deadline = deadline;
         this.setType('D');
         this.setIsCompleted(isCompleted);
     }
 
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return this.deadline;
     }
 
-    public void setDeadline(){
+    public void setDeadline(LocalDateTime deadline){
         this.deadline = deadline;
     }
 

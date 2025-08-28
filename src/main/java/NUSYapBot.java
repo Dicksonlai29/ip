@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class NUSYapBot {
     private static String STORAGE_PATH = "../../../data/data.txt";
@@ -37,12 +39,18 @@ public class NUSYapBot {
                                 taskDetail[1].equals("T")));
                         
                     } else if (taskDetail[0].equals("D")) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        LocalDateTime date = LocalDateTime.parse(taskDetail[3], formatter);
+                        
                         taskList.add(new Deadline(taskDetail[2], 
-                                taskDetail[3], taskDetail[1].equals("T")));
+                                date, taskDetail[1].equals("T")));
 
                     } else if (taskDetail[0].equals("E")) {
-                        taskList.add(new Event(taskDetail[2], taskDetail[3], 
-                                taskDetail[4], taskDetail[1].equals("T")));
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        LocalDateTime start = LocalDateTime.parse(taskDetail[3], formatter);
+                        LocalDateTime end = LocalDateTime.parse(taskDetail[4], formatter);
+
+                        taskList.add(new Event(taskDetail[2], start, end, taskDetail[1].equals("T")));
                     }
                     
                 }
@@ -155,7 +163,7 @@ public class NUSYapBot {
                     addNewTask(newTask);
                     printAddTaskMessage(taskList, pointer);
 
-                } catch (LackingInputException | UnrecognisedCommandException e) {
+                } catch (LackingInputException | UnrecognisedCommandException | DateFormatException e) {
                     System.out.println(e);
                 } catch (IOException e) {
                     System.out.println(e);
