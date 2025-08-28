@@ -85,7 +85,7 @@ public class CommandHandler {
         
     }
     public static void delete(
-        ArrayList<Task> taskList, String answer, int pointer) 
+        ArrayList<Task> taskList, String answer) 
         throws LackingInputException, InvalidTaskException {
         String[] parts = answer.split(" ");
         if (parts.length < 2) {
@@ -100,7 +100,7 @@ public class CommandHandler {
             System.out.println("_________________________________" + "\n" +
                     "Noted. I've removed this task:\n" +
                     delTask + "\n" +
-                    "Now you have " + (pointer - 1) + " tasks in the list.\n" +
+                    "Now you have " + taskList.size() + " tasks in the list.\n" +
                     "_________________________________");
 
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
