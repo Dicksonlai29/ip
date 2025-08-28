@@ -12,13 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class NUSYapBot {
     private static String STORAGE_PATH = "../../../data/data.txt";
 
-    public static void printAddTaskMessage(ArrayList<Task> taskList, int pointer) {
-        System.out.println( "_________________________________" + "\n" +
-                "Got it. I've added this task: " +
-                taskList.get(pointer - 1) + "\n" +
-                "Now you have "+ pointer +" tasks in the list." + "\n" +
-                "_________________________________");
-    };
+    
 
     public static ArrayList<Task> getTaskList() {
         //save task from hard disk to an arrayList
@@ -70,10 +64,17 @@ public class NUSYapBot {
                 + " | " + task.getTitle();
         if (task.getType() == 'D') {
             Deadline taskD = (Deadline) task;
-            line += " | " + taskD.getDeadline();
+            String ddl = taskD.getDeadline().format(
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+            line += " | " + ddl;
         } else if (task.getType() == 'E') {
             Event taskE = (Event) task;
-            line += " | " + taskE.getStartDate() + " | " + taskE.getEndDate();
+            String start = taskE.getStartDate().format(
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+            String end = taskE.getEndDate().format(
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                    
+            line += " | " + start + " | " + end;
         } 
         fw.write(line + "\n");
     }
@@ -93,27 +94,11 @@ public class NUSYapBot {
     }
 
     public static void main(String[] args) {
-        String welcome = """
-                         ________________________________
-                         Hello! I'm NUSYapBot!
-                         What can I do for you?
-                        _________________________________
-                        """;
-
-        String end = """
-                     _________________________________
-                     Goodbye. See you!
-                     _________________________________
-                     """;
-            
-        System.out.println(welcome);
         boolean flag = true;
         ArrayList<Task> taskList = getTaskList();
         int pointer = taskList.size();
         
-        for (int i = 0; i < pointer; i++) {
-            System.out.println(taskList.get(i));
-        }
+        Ui.printWelcomeMessage(taskList);
         
         Scanner input = new Scanner(System.in);
 
@@ -122,13 +107,11 @@ public class NUSYapBot {
 
             if (answer.equals("list")) {
                 System.out.println("_________________________________");
-                for (int i = 0; i < pointer; i++) {
-                    System.out.println(taskList.get(i));
-                }
+                Ui.printTaskList(taskList);
                 System.out.println("_________________________________");
             } else if (answer.equals("bye")) {
                 flag = false;
-                System.out.println(end);
+                Ui.printGoodbyeMessage();
 
             } else if (answer.startsWith("mark")) {
                 try {
@@ -161,7 +144,7 @@ public class NUSYapBot {
                     taskList.add(newTask);
                     pointer++;
                     addNewTask(newTask);
-                    printAddTaskMessage(taskList, pointer);
+                    Ui.printAddTaskMessage(taskList);
 
                 } catch (LackingInputException | UnrecognisedCommandException | DateFormatException e) {
                     System.out.println(e);
