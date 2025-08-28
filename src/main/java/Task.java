@@ -1,7 +1,8 @@
 public class Task {
 
     private String title;
-    private boolean isCompleted;
+    protected boolean isCompleted;
+    private char type;
 
 
     public Task(String title) {
@@ -14,10 +15,18 @@ public class Task {
         this.isCompleted = status;
     }
 
+    public void setType(char type) {
+        this.type = type;
+    }
+
     public String getTitle() {
         return this.title;
     }
     public boolean getIsCompleted() {
         return this.isCompleted;
     }
+    public char getType() {
+        return this.type;
+    }
+    
 }
