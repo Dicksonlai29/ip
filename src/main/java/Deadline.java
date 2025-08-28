@@ -4,6 +4,15 @@ public class Deadline extends Task {
     public Deadline(String task, String deadline) {
         super(task);
         this.deadline = deadline;
+        this.setType('D');
+       
+    }
+
+    public Deadline(String task, String deadline, boolean isCompleted) {
+        super(task);
+        this.deadline = deadline;
+        this.setType('D');
+        this.setIsCompleted(isCompleted);
     }
 
     public String getDeadline() {

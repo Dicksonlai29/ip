@@ -6,6 +6,15 @@ public class Event extends Task {
         super(task);
         this.startDate = start;
         this.endDate = end;
+        this.setType('E');
+        
+    }
+    public Event(String task, String start, String end, boolean isCompleted) {
+        super(task);
+        this.startDate = start;
+        this.endDate = end;
+        this.setType('E');
+        this.setIsCompleted(isCompleted);
     }
 
     public String getStartDate() {
