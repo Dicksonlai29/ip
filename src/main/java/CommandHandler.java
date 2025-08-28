@@ -4,8 +4,12 @@ import java.io.RandomAccessFile;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class CommandHandler {
-    public static Task createTask(String answer) throws LackingInputException, UnrecognisedCommandException {
+    public static Task createTask(String answer) throws LackingInputException, UnrecognisedCommandException, DateFormatException {
 
         if (answer.startsWith("todo ")) {
 
@@ -30,8 +34,16 @@ public class CommandHandler {
             int indexOfDeadline = indexOfBy + 4;
 
             String taskTitle = answer.substring(9, indexOfBy-1);
+            
+            //deadline will be in the format dd-mm-yyyy tttt (24hrs)
+            //check for format and if wrong, throw error
             String deadline = answer.substring(indexOfDeadline);
-            return new Deadline(taskTitle, deadline);
+            if (!deadline.matches("\\d{1,2}-\\d{1,2}-\\d{2,4}(?: \\d{4})?")) {
+                throw new DateFormatException();
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+            LocalDateTime date = LocalDateTime.parse(deadline, formatter);
+            return new Deadline(taskTitle, date);
 
         } else if (answer.startsWith("event ")) {
             if (answer.length() < 7) {
@@ -52,9 +64,20 @@ public class CommandHandler {
             int indexOfEndDate = indexOfTo + 4;
 
             String taskTitle = answer.substring(6, indexOfFrom-1);
+
+            //start and end time will be in the format dd-mm-yyyy tttt (24hrs)
+            //check for format and if wrong, throw error
             String startDate = answer.substring(indexOfStartDate, indexOfTo);
             String endDate = answer.substring(indexOfEndDate);
-            return new Event(taskTitle, startDate, endDate);
+            if (!startDate.matches("\\d{1,2}[-/.]\\d{1,2}[-/.]\\d{2,4}(?: \\d{4})?") ||
+                !endDate.matches("\\d{1,2}[-/.]\\d{1,2}[-/.]\\d{2,4}(?: \\d{4})?")) {
+                throw new DateFormatException();
+            }
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+            LocalDateTime start = LocalDateTime.parse(startDate, formatter);
+            LocalDateTime end = LocalDateTime.parse(endDate, formatter);
+            return new Event(taskTitle, start, end);
         } else {
             //unrecognised command
             throw new UnrecognisedCommandException();

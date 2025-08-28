@@ -1,15 +1,17 @@
-public class Event extends Task {
-    private String startDate;
-    private String endDate;
+import java.time.LocalDateTime;
 
-    public Event(String task, String start, String end) {
+public class Event extends Task {
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+
+    public Event(String task, LocalDateTime start, LocalDateTime end) {
         super(task);
         this.startDate = start;
         this.endDate = end;
         this.setType('E');
         
     }
-    public Event(String task, String start, String end, boolean isCompleted) {
+    public Event(String task, LocalDateTime start, LocalDateTime end, boolean isCompleted) {
         super(task);
         this.startDate = start;
         this.endDate = end;
@@ -17,10 +19,10 @@ public class Event extends Task {
         this.setIsCompleted(isCompleted);
     }
 
-    public String getStartDate() {
+    public LocalDateTime getStartDate() {
         return this.startDate;
     }
-    public String getEndDate() {
+    public LocalDateTime getEndDate() {
         return this.endDate;
     }
 
