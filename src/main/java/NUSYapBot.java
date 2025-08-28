@@ -55,9 +55,7 @@ public class NUSYapBot {
         return taskList;
     }
 
-    public static void addTask(Task task) throws IOException {
-        
-        FileWriter fw = new FileWriter(STORAGE_PATH, true);
+    public static void addTask(FileWriter fw, Task task) throws IOException {
         //Format: Type | T/F | title | other-var
         String line = task.getType() + " | "  
                 + (task.getIsCompleted() ? "T" : "F")
@@ -70,10 +68,21 @@ public class NUSYapBot {
             line += " | " + taskE.getStartDate() + " | " + taskE.getEndDate();
         } 
         fw.write(line + "\n");
+    }
+
+    public static void addNewTask(Task task) throws IOException {
+        FileWriter fw = new FileWriter(STORAGE_PATH, true);
+        addTask(fw, task);
         fw.close();
     }
 
-    
+    public static void rewriteMemory(ArrayList<Task> taskList) throws IOException {
+        FileWriter fw = new FileWriter(STORAGE_PATH, false); //false indicate overwrite mode
+        for (Task task: taskList) {
+            addTask(fw, task);
+        }
+        fw.close();
+    }
 
     public static void main(String[] args) {
         String welcome = """
@@ -130,7 +139,10 @@ public class NUSYapBot {
                 try {
                     CommandHandler.delete(taskList, answer, pointer);
                     pointer--;
-                } catch (LackingInputException | InvalidTaskException e) {
+                    //rewrite the hard disk file
+                    rewriteMemory(taskList);
+
+                } catch (LackingInputException | InvalidTaskException | IOException e) {
                     System.out.println(e);
                 }
             }
@@ -140,13 +152,13 @@ public class NUSYapBot {
                     Task newTask = CommandHandler.createTask(answer);
                     taskList.add(newTask);
                     pointer++;
-                    addTask(newTask);
+                    addNewTask(newTask);
                     printAddTaskMessage(taskList, pointer);
 
                 } catch (LackingInputException | UnrecognisedCommandException e) {
                     System.out.println(e);
                 } catch (IOException e) {
-
+                    System.out.println(e);
                 }
 
             }
