@@ -1,3 +1,18 @@
+//components
+import nusyapbot.components.CommandHandler;
+import nusyapbot.components.Memory;
+import nusyapbot.components.Ui;
+//tasktype
+import nusyapbot.tasktype.Task;
+import nusyapbot.tasktype.ToDo;
+import nusyapbot.tasktype.Deadline;
+import nusyapbot.tasktype.Event;
+//exceptions
+import nusyapbot.exceptions.LackingInputException;
+import nusyapbot.exceptions.UnrecognisedCommandException;
+import nusyapbot.exceptions.DateFormatException;
+import nusyapbot.exceptions.InvalidTaskException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,10 +31,11 @@ public class NUSYapBot {
 
     public static void main(String[] args) {
         boolean flag = true;
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
-            ArrayList<Task> taskList = Memory.getTaskList(STORAGE_PATH);
+            taskList = Memory.getTaskList(STORAGE_PATH);
         } catch (IOException e) {
-            System.out.println("Memory retrieval error. Please try again.")
+            System.out.println("Memory retrieval error. Please try again.");
         }
         
         Ui.printWelcomeMessage(taskList);

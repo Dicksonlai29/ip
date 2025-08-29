@@ -1,3 +1,5 @@
+package nusyapbot.exceptions;
+
 public class NUSYapBotException extends Exception {
     public NUSYapBotException(String message) {
         super(message);
