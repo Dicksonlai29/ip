@@ -5,6 +5,12 @@ import nusyapbot.tasktype.Task;
 import java.util.ArrayList;
 
 public class Ui {
+
+    /**
+     * Prints the default welcome note along with list of existing tasks.
+     *
+     * @param taskList the current list of tasks
+     */
     public static void printWelcomeMessage(ArrayList<Task> taskList) {
         String welcome = """
                          ________________________________
@@ -18,12 +24,21 @@ public class Ui {
         printTaskList(taskList);
     }
 
+    /**
+     * Prints the current list of tasks in a list format.
+     *
+     * @param taskList the current list of tasks
+     */
     public static void printTaskList(ArrayList<Task> taskList) {
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(taskList.get(i));
         }
     }
 
+    /**
+     * Prints the default end note when exiting the program.
+     *
+     */
     public static void printGoodbyeMessage() {
         String end = """
                      _________________________________
@@ -34,6 +49,11 @@ public class Ui {
 
     }
 
+    /**
+     * Prints a message to confirm that a task has been added.
+     *
+     * @param taskList the current list of tasks
+     */
     public static void printAddTaskMessage(ArrayList<Task> taskList) {
         int numOfTask = taskList.size();
         System.out.println( "_________________________________" + "\n" +

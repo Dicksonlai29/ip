@@ -20,7 +20,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Handles the different commands that the user types in.
+ */
 public class CommandHandler {
+
+
+    /**
+     * Creates a new Task object depending on the command entered.
+     * <p>
+     * Recognises commands such as "todo", "deadline", and "event".
+     *
+     * @param answer the user command string that describes the task
+     * @return a Task object of any of these 3 types: ToDo, Deadline, or Event
+     * @throws LackingInputException if the command is missing details
+     * @throws UnrecognisedCommandException if the command is not known
+     */
     public static Task createTask(String answer) throws LackingInputException, UnrecognisedCommandException, DateFormatException {
 
         if (answer.startsWith("todo ")) {
@@ -96,6 +111,15 @@ public class CommandHandler {
         }
         
     }
+
+    /**
+     * Deletes a task from the list based on the user’s input.
+     *
+     * @param taskList the list of tasks
+     * @param answer the user command string (e.g., "delete 2")
+     * @throws LackingInputException if the user did not provide a task number
+     * @throws InvalidTaskException if the task number does not exist
+     */
     public static void delete(
         ArrayList<Task> taskList, String answer) 
         throws LackingInputException, InvalidTaskException {
@@ -119,7 +143,17 @@ public class CommandHandler {
             throw new InvalidTaskException();
         }
     }
-        public static void markTask(
+
+    /**
+     * Marks or unmarks a task in the list depending on the answer prompt.
+     *
+     * @param taskList the list of tasks
+     * @param answer the user command string (e.g., "mark 2" or "unmark 3")
+     * @param status true if marking as done, false if unmarking
+     * @throws LackingInputException if the user did not provide a task number
+     * @throws InvalidTaskException if the task number does not exist
+     */
+    public static void markTask(
             ArrayList<Task> taskList, String answer, boolean status, String loc) 
             throws LackingInputException, InvalidTaskException, IOException, FileNotFoundException {
             String[] parts = answer.split(" ");
