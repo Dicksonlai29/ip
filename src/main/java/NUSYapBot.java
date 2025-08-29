@@ -4,9 +4,7 @@ import nusyapbot.components.Memory;
 import nusyapbot.components.Ui;
 //tasktype
 import nusyapbot.tasktype.Task;
-import nusyapbot.tasktype.ToDo;
-import nusyapbot.tasktype.Deadline;
-import nusyapbot.tasktype.Event;
+
 //exceptions
 import nusyapbot.exceptions.LackingInputException;
 import nusyapbot.exceptions.UnrecognisedCommandException;
@@ -16,18 +14,10 @@ import nusyapbot.exceptions.InvalidTaskException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class NUSYapBot {
     private static String STORAGE_PATH = "../../../data/data.txt";
-
-    
 
     public static void main(String[] args) {
         boolean flag = true;
