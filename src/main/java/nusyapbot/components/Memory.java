@@ -17,6 +17,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Memory {
 
+    /**
+     * Loads the list of tasks from the storage file.
+     * <p>
+     * If the file exists, it will read each line and convert them
+     * back into Task objects (ToDo, Deadline, or Event).
+     * If the file does not exist, a new empty list is returned.
+     *
+     * @return an ArrayList containing all tasks read from the file
+     */
     public static ArrayList<Task> getTaskList(String loc) throws IOException {
         //save task from hard disk to an arrayList
         ArrayList<Task> taskList = new ArrayList<>();
@@ -54,6 +63,15 @@ public class Memory {
         return taskList;
     }
 
+    /**
+     * Formatting the task object into String and write to file
+     * <p>
+     * The task is written in a specific format depending on its type
+     * (ToDo, Deadline, or Event).
+     *
+     * @param task the task object to be added
+     * @throws IOException if the file cannot be written
+     */
     public static void addTask(FileWriter fw, Task task) throws IOException {
         //Format: Type | T/F | title | other-var
         String line = task.getType() + " | "  
@@ -76,12 +94,30 @@ public class Memory {
         fw.write(line + "\n");
     }
 
+    /**
+     * Saves a new task by appending it to the storage file.
+     * <p>
+     * The task is written in a specific format depending on its type
+     * (ToDo, Deadline, or Event).
+     *
+     * @param task the task object to be added
+     * @throws IOException if the file cannot be written
+     */
     public static void addNewTask(Task task, String loc) throws IOException {
         FileWriter fw = new FileWriter(loc, true);
         addTask(fw, task);
         fw.close();
     }
 
+    /**
+     * Overwrite the existing storage file with the current list of task.
+     * <p>
+     * The task is written in a specific format depending on its type
+     * (ToDo, Deadline, or Event).
+     *
+     * @param task the task object to be added
+     * @throws IOException if the file cannot be written
+     */
     public static void rewriteMemory(ArrayList<Task> taskList, String loc) throws IOException {
         FileWriter fw = new FileWriter(loc, false); //false indicate overwrite mode
         for (Task task: taskList) {

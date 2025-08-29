@@ -20,9 +20,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Handles the different commands that the user types in.
+ */
 public class CommandHandler {
+    /**
+     * Creates a new Task object depending on the command entered.
+     * <p>
+     * Recognises commands such as "todo", "deadline", and "event".
+     *
+     * @param answer the user command string that describes the task
+     * @return a Task object of any of these 3 types: ToDo, Deadline, or Event
+     * @throws LackingInputException if the command is missing details
+     * @throws UnrecognisedCommandException if the command is not known
+     */
     public static Task createTask(String answer)
-            throws LackingInputException, UnrecognisedCommandException, DateFormatException {
+        throws LackingInputException, UnrecognisedCommandException, DateFormatException {
 
         if (answer.startsWith("todo ")) {
 

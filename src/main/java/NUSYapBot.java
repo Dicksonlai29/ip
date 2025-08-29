@@ -16,6 +16,13 @@ import java.util.Scanner;
 
 import java.io.IOException;
 
+/**
+ * Main class for the NUSYapBot program.
+ * <p>
+ * This bot allows users to create, manage, and save tasks.
+ * Tasks are stored in a text file so they can be retrieved
+ * the next time the program is run.
+ */
 public class NUSYapBot {
     private static String STORAGE_PATH = "./data/data.txt";
 
