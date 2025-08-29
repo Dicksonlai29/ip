@@ -1,0 +1,5 @@
+T | F | sip tea
+T | F | get flower
+T | F | flower decorating
+T | F | flowerdance
+T | F | flowe resting

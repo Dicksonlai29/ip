@@ -74,9 +74,9 @@ public class NUSYapBot {
                 } catch (LackingInputException | InvalidTaskException | IOException e) {
                     System.out.println(e);
                 }
-            }
-
-            else {
+            } else if (answer.startsWith("find")) {
+                CommandHandler.find(taskList, answer);
+            } else {
                 try {
                     Task newTask = CommandHandler.createTask(answer);
                     taskList.add(newTask);
