@@ -17,7 +17,7 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class NUSYapBot {
-    private static String STORAGE_PATH = "../../../data/data.txt";
+    private static String STORAGE_PATH = "./data/data.txt";
 
     public static void main(String[] args) {
         boolean flag = true;
