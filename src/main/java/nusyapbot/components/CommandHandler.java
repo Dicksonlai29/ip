@@ -168,7 +168,35 @@ public class CommandHandler {
 
             } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
                 throw new InvalidTaskException();
-            } 
+            }
+
+
+    }
+
+    public static void find(ArrayList<Task> taskList, String answer) {
+        // extract keyword
+        String keyword = answer.substring(5);
+        ArrayList<Task> matchedList = new ArrayList<>();
+        StringBuilder message = new StringBuilder();
+
+        for (Task task: taskList) {
+            if (task.getTitle().contains(keyword)) {
+                matchedList.add(task);
+            }
+        }
+
+        if (matchedList.isEmpty()) {
+            message = new StringBuilder("Sorry, there's no matching tasks in your list.");
+        } else {
+            message.append("There's a total of ").append(matchedList.size()).append(" matching tasks found:\n");
+            for (Task task: matchedList) {
+                message.append(task).append("\n");
+            }
+        }
+
+        System.out.println( "_________________________________" + "\n" +
+                message +
+                "_________________________________");
 
     }
 
