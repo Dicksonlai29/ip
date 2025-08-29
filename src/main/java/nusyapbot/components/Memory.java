@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 public class Memory {
 
     public static ArrayList<Task> getTaskList(String loc) throws IOException {

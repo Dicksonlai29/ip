@@ -21,7 +21,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class CommandHandler {
-    public static Task createTask(String answer) throws LackingInputException, UnrecognisedCommandException, DateFormatException {
+    public static Task createTask(String answer)
+            throws LackingInputException, UnrecognisedCommandException, DateFormatException {
 
         if (answer.startsWith("todo ")) {
 
