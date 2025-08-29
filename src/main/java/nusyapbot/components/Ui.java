@@ -1,3 +1,7 @@
+package nusyapbot.components;
+//tasktype
+import nusyapbot.tasktype.Task;
+
 import java.util.ArrayList;
 
 public class Ui {

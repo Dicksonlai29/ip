@@ -1,3 +1,10 @@
+package nusyapbot.components;
+//tasktype
+import nusyapbot.tasktype.Task;
+import nusyapbot.tasktype.ToDo;
+import nusyapbot.tasktype.Deadline;
+import nusyapbot.tasktype.Event;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
