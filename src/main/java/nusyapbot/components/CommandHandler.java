@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.IllegalFormatException;
 
 /**
  * Handles the different commands that the user types in.
@@ -35,10 +36,8 @@ public class CommandHandler {
      * @throws UnrecognisedCommandException if the command is not known
      */
     public static Task createTask(String answer)
-        throws LackingInputException, UnrecognisedCommandException, DateFormatException {
-
+        throws LackingInputException, UnrecognisedCommandException, DateFormatException, IllegalFormatException {
         if (answer.startsWith("todo ")) {
-
             if (answer.length() < 6) {
                 throw new LackingInputException("title");
             }
@@ -64,11 +63,12 @@ public class CommandHandler {
             //deadline will be in the format dd-mm-yyyy tttt (24hrs)
             //check for format and if wrong, throw error
             String deadline = answer.substring(indexOfDeadline);
+            deadline = deadline.trim();
             if (!deadline.matches("\\d{1,2}-\\d{1,2}-\\d{2,4}(?: \\d{4})?")) {
                 throw new DateFormatException();
             }
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-            LocalDateTime date = LocalDateTime.parse(deadline, formatter);
+
+            LocalDateTime date = DateHandler.saveAsDateTime(deadline);
             return new Deadline(taskTitle, date);
 
         } else if (answer.startsWith("event ")) {
@@ -95,14 +95,16 @@ public class CommandHandler {
             //check for format and if wrong, throw error
             String startDate = answer.substring(indexOfStartDate, indexOfTo);
             String endDate = answer.substring(indexOfEndDate);
+            startDate = startDate.trim();
+            endDate = endDate.trim();
+
             if (!startDate.matches("\\d{1,2}[-/.]\\d{1,2}[-/.]\\d{2,4}(?: \\d{4})?") ||
                 !endDate.matches("\\d{1,2}[-/.]\\d{1,2}[-/.]\\d{2,4}(?: \\d{4})?")) {
                 throw new DateFormatException();
             }
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-            LocalDateTime start = LocalDateTime.parse(startDate, formatter);
-            LocalDateTime end = LocalDateTime.parse(endDate, formatter);
+            LocalDateTime start = DateHandler.saveAsDateTime(startDate);
+            LocalDateTime end = DateHandler.saveAsDateTime(endDate);
             return new Event(taskTitle, start, end);
         } else {
             //unrecognised command

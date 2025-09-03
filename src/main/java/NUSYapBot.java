@@ -27,6 +27,7 @@ public class NUSYapBot {
     private static String STORAGE_PATH = "./data/data.txt";
 
     public static void main(String[] args) {
+
         boolean flag = true;
         ArrayList<Task> taskList = new ArrayList<>();
         try {
