@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ByeCommand extends Command {
 
     public ByeCommand() {
-        super(false);
+        super(true);
     }
     @Override
     public String execute(ArrayList<Task> taskList, Memory memory) {
