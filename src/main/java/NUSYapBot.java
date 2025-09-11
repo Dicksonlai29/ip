@@ -4,7 +4,6 @@ import nusyapbot.components.Memory;
 import nusyapbot.components.Ui;
 //tasktype
 import nusyapbot.tasktype.Task;
-
 //exceptions
 import nusyapbot.exceptions.LackingInputException;
 import nusyapbot.exceptions.UnrecognisedCommandException;
@@ -92,5 +91,12 @@ public class NUSYapBot {
 
             }
         }
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
