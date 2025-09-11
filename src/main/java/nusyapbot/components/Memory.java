@@ -16,7 +16,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Memory {
+    private String storageLocation;
 
+    public Memory(String loc) {
+        this.storageLocation = loc;
+    }
     /**
      * Loads the list of tasks from the storage file.
      * <p>
@@ -26,12 +30,12 @@ public class Memory {
      *
      * @return an ArrayList containing all tasks read from the file
      */
-    public static ArrayList<Task> getTaskList(String loc) throws IOException {
+    public ArrayList<Task> getTaskList() throws IOException {
         //save task from hard disk to an arrayList
         ArrayList<Task> taskList = new ArrayList<>();
         
         //load the task list saved previously
-        File f = new File(loc);
+        File f = new File(storageLocation);
         if (!f.createNewFile()) {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
@@ -72,7 +76,7 @@ public class Memory {
      * @param task the task object to be added
      * @throws IOException if the file cannot be written
      */
-    public static void addTask(FileWriter fw, Task task) throws IOException {
+    public void addTask(FileWriter fw, Task task) throws IOException {
         //Format: Type | T/F | title | other-var
         String line = task.getType() + " | "  
                 + (task.getIsCompleted() ? "T" : "F")
@@ -103,8 +107,8 @@ public class Memory {
      * @param task the task object to be added
      * @throws IOException if the file cannot be written
      */
-    public static void addNewTask(Task task, String loc) throws IOException {
-        FileWriter fw = new FileWriter(loc, true);
+    public void addNewTask(Task task) throws IOException {
+        FileWriter fw = new FileWriter(storageLocation, true);
         addTask(fw, task);
         fw.close();
     }
@@ -115,13 +119,13 @@ public class Memory {
      * The task is written in a specific format depending on its type
      * (ToDo, Deadline, or Event).
      *
-     * @param task the task object to be added
+     * @param Task the task object to be added
      * @throws IOException if the file cannot be written
      */
-    public static void rewriteMemory(ArrayList<Task> taskList, String loc) throws IOException {
-        FileWriter fw = new FileWriter(loc, false); //false indicate overwrite mode
+    public void rewriteMemory(ArrayList<Task> taskList) throws IOException {
+        FileWriter fw = new FileWriter(storageLocation, false); //false indicate overwrite mode
         for (Task task: taskList) {
-            addTask(fw, task);
+            this.addTask(fw, task);
         }
         fw.close();
     }

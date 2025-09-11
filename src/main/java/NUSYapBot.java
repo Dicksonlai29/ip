@@ -1,14 +1,13 @@
 //components
+import nusyapbot.command.Command;
 import nusyapbot.components.CommandHandler;
 import nusyapbot.components.Memory;
+import nusyapbot.components.Parser;
 import nusyapbot.components.Ui;
 //tasktype
+import nusyapbot.exceptions.*;
 import nusyapbot.tasktype.Task;
 //exceptions
-import nusyapbot.exceptions.LackingInputException;
-import nusyapbot.exceptions.UnrecognisedCommandException;
-import nusyapbot.exceptions.DateFormatException;
-import nusyapbot.exceptions.InvalidTaskException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,35 +22,30 @@ import java.io.IOException;
  * the next time the program is run.
  */
 public class NUSYapBot {
+    private ArrayList<Task> taskList;
+    private Memory memory;
     private static String STORAGE_PATH = "./data/data.txt";
 
-    public static void main(String[] args) {
+    public NUSYapBot() {
+        taskList = new ArrayList<>();
+        memory = new Memory(STORAGE_PATH);
+    }
 
-        boolean flag = true;
-        ArrayList<Task> taskList = new ArrayList<>();
-        try {
-            taskList = Memory.getTaskList(STORAGE_PATH);
-        } catch (IOException e) {
-            System.out.println("Memory retrieval error. Please try again.");
-        }
-        
+    public void run() throws IOException, NUSYapBotException {
+        boolean isRunning = true;
         Ui.printWelcomeMessage(taskList);
 
-        Scanner input = new Scanner(System.in);
+        while (isRunning) {
+            String answer = Ui.readInput();
+            // Step 1: Extract command type
+            Command command = Parser.parse(answer);
+            // Step 2: Execute the command and save response to taskList
+            String response = command.execute(taskList, memory);
+            // Step 3: Save changes
+            isRunning = command.getIsBye();
 
-        while (flag) {
-            String answer = input.nextLine();
-
-            if (answer.equals("list")) {
-                System.out.println("_________________________________");
-                Ui.printTaskList(taskList);
-                System.out.println("_________________________________");
-
-            } else if (answer.equals("bye")) {
-                flag = false;
-                Ui.printGoodbyeMessage();
-
-            } else if (answer.startsWith("mark")) {
+            //Different command type & their procedure
+            if (answer.startsWith("mark")) {
                 try {
                     CommandHandler.markTask(taskList, answer, true, STORAGE_PATH);
                 } catch (LackingInputException | InvalidTaskException | IOException e) {
@@ -67,7 +61,7 @@ public class NUSYapBot {
             } else if (answer.startsWith("delete")) {
                 try {
                     CommandHandler.delete(taskList, answer);
-          
+
                     //rewrite the hard disk file
                     Memory.rewriteMemory(taskList, STORAGE_PATH);
 
@@ -93,10 +87,29 @@ public class NUSYapBot {
         }
     }
 
+    public static void main(String[] args) {
+        try {
+            new NUSYapBot().run();
+        } catch (NUSYapBotException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Solution below adapted from @@author pei886
     /**
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            // Step 1: Extract command type
+            Command command = Parser.parse(input);
+            // Step 2: Execute the command and save response
+            // to taskList & memory
+            String response = command.execute(taskList, memory);
+            // Step 4: Return response to UI
+            return response;
+        } catch (NUSYapBotException | IOException e) {
+            return e.getMessage();
+        }
     }
 }

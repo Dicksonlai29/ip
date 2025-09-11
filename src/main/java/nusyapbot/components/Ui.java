@@ -1,10 +1,19 @@
 package nusyapbot.components;
 //tasktype
+import nusyapbot.command.ByeCommand;
+import nusyapbot.command.ListCommand;
 import nusyapbot.tasktype.Task;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui {
+    private static String DIVIDER = "___________________________________\n";
+    private static final Scanner input = new Scanner(System.in);
+
+    public static String readInput() {
+        return input.nextLine();
+    }
 
     /**
      * Prints the default welcome note along with list of existing tasks.
@@ -13,13 +22,13 @@ public class Ui {
      */
     public static void printWelcomeMessage(ArrayList<Task> taskList) {
         String welcome = """
-                         ________________________________
                          Hello! I'm NUSYapBot!
                          What can I do for you?
-                        _________________________________
                         """;
 
-        System.out.println(welcome);
+        System.out.println(DIVIDER +
+                welcome +
+                DIVIDER);
 
         printTaskList(taskList);
     }
@@ -30,23 +39,8 @@ public class Ui {
      * @param taskList the current list of tasks
      */
     public static void printTaskList(ArrayList<Task> taskList) {
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(taskList.get(i));
-        }
-    }
-
-    /**
-     * Prints the default end note when exiting the program.
-     *
-     */
-    public static void printGoodbyeMessage() {
-        String end = """
-                     _________________________________
-                     Goodbye. See you!
-                     _________________________________
-                     """;
-        System.out.println(end);
-
+        String tasks = (new ListCommand()).execute(taskList);
+        System.out.println(tasks);
     }
 
     /**

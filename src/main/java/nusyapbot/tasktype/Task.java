@@ -1,10 +1,13 @@
 package nusyapbot.tasktype;
 
+import java.time.format.DateTimeFormatter;
+
 public class Task {
 
     private String title;
     protected boolean isCompleted;
     private char type;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")
 
 
     public Task(String title) {

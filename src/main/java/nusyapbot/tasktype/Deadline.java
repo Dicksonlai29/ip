@@ -28,8 +28,9 @@ public class Deadline extends Task {
     }
 
     public String toString() {
+        String formattedDeadline = this.deadline.format(formatter);
         return "[D]" + (this.getIsCompleted() ? "[X] " : "[ ] ") +
                 this.getTitle() +
-                " (by: " + this.deadline + ")";
+                " (by: " + formattedDeadline + ")";
     }
 }

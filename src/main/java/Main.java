@@ -25,7 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(410);
-            fxmlLoader.<MainWindow>getController().setDuke(nusYapBot);
+            fxmlLoader.<MainWindow>getController().setBot(nusYapBot);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

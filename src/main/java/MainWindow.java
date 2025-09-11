@@ -29,8 +29,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(diaCont.heightProperty());
     }
 
-    public void setDuke(NUSYapBot d) {
-        nusYapBot = d;
+    public void setBot(NUSYapBot bot) {
+        nusYapBot = bot;
     }
 
     @FXML

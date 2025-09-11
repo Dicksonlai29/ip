@@ -29,8 +29,10 @@ public class Event extends Task {
     }
 
     public String toString() {
+        String formattedStartDate = this.startDate.format(formatter);
+        String formattedEndDate = this.endDate.format(formatter);
         return "[E]" + (this.getIsCompleted() ? "[X] " : "[ ] ") +
                 this.getTitle() +
-                " (from: " + this.startDate + "to: " + this.endDate + ")";
+                " (from: " + formattedStartDate + "to: " + formattedEndDate + ")";
     }
 }

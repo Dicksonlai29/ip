@@ -14,12 +14,13 @@ public class MemoryTest {
     @Test
     public void testGetTaskList() throws IOException {
         String loc = "./data/forTest.txt";
+        Memory memory = new Memory(loc);
         ArrayList<Task> taskList= new ArrayList<>();
         taskList.add(new ToDo(("text abc")));
         taskList.add(new ToDo(("text def")));
         taskList.add(new ToDo(("text ghi")));
 
-        assertEquals(taskList, Memory.getTaskList(loc));
+        assertEquals(taskList, memory.getTaskList());
     }
 
 }
