@@ -26,7 +26,7 @@ public class EventCommand extends Command {
         Task newTask = new Event(title, startDate, endDate);
         taskList.add(newTask);
         memory.addNewTask(newTask);
-        return "Got it. I've added this task: " +
+        return "Got it. I've added this task: \n" +
                 newTask + "\n" +
                 "Now you have "+ taskList.size() +" tasks in the list." + "\n";
     }

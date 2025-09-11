@@ -15,4 +15,9 @@ public class ByeCommand extends Command {
         return "It's nice talking to you. See you!";
     }
 
+    @Override
+    public boolean getIsBye() {
+        return true;
+    }
+
 }

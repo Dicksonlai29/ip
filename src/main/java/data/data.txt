@@ -1,10 +1,12 @@
-T | F | sip tea
-T | F | get flower
+T | T | sip tea
+T | T | get flower
 T | F | flower decorating
-T | F | flowerdance
+T | T | flowerdance
 T | F | flowe resting
 D | F | aa | 06-09-2025 0000
 D | F | bb | 02-09-2025 0000
 T | F | say hi
 T | F | say hi
 T | F | submit hw
+D | F | cc  | 22-09-2025 0000
+E | F | meet author  | 12-09-2025 1000 | 12-09-2025 1130

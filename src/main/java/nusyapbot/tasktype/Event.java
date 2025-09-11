@@ -33,6 +33,6 @@ public class Event extends Task {
         String formattedEndDate = this.endDate.format(formatter);
         return "[E]" + (this.getIsCompleted() ? "[X] " : "[ ] ") +
                 this.getTitle() +
-                " (from: " + formattedStartDate + "to: " + formattedEndDate + ")";
+                " (from: " + formattedStartDate + " to: " + formattedEndDate + ")";
     }
 }

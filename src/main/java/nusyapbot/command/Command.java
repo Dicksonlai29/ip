@@ -11,12 +11,12 @@ public abstract class Command {
     private boolean isBye;
 
     public Command(boolean isBye) {
-        isBye = isBye;
+        this.isBye = isBye;
     }
     public abstract String execute(ArrayList<Task> tasklist, Memory memory)
             throws NUSYapBotException, IOException;
 
     public boolean getIsBye() {
-        return isBye;
+        return this.isBye;
     }
 }

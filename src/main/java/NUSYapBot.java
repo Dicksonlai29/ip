@@ -34,6 +34,7 @@ public class NUSYapBot {
 
     public void run() throws IOException, NUSYapBotException {
         boolean isRunning = true;
+        taskList = memory.getTaskList();
         Ui.printWelcomeMessage(taskList, memory);
 
         while (isRunning) {
@@ -43,8 +44,9 @@ public class NUSYapBot {
             // Step 2: Execute the command and save response to taskList
             String response = command.execute(taskList, memory);
             System.out.println(response);
-            // Step 3: Save changes
+            // Step 3: Check if loop should continue
             isRunning = !command.getIsBye();
+            System.out.println(command.getIsBye());
         }
     }
 

@@ -47,7 +47,7 @@ public class Parser {
             throw new LackingInputException("title or deadline");
         }
         String title = parts[0];
-        String deadline = parts[1];
+        String deadline = parts[1].trim();
         LocalDateTime date = DateHandler.saveAsDateTime(deadline);
 
         return new DeadlineCommand(title, date);
@@ -56,18 +56,19 @@ public class Parser {
 
     private static EventCommand parseEvent(String paramInfo)
             throws NUSYapBotException {
-        String[] parts = paramInfo.split("/",3);
-        if (parts.length < 3) {
+        String[] parts = paramInfo.split("/from",2);
+        if (parts.length < 2) {
             throw new LackingInputException("title or startTime or endTime");
         }
 
         String title = parts[0];
-        String start = parts[1];
+        String[] dates = parts[1].split("/to",2);
+        String start = dates[0].trim();
         LocalDateTime startDate = DateHandler.saveAsDateTime(start);
-        String end = parts[2];
+        String end = dates[1].trim();
         LocalDateTime endDate = DateHandler.saveAsDateTime(end);
 
-        return new EventCommand(paramInfo, startDate, endDate);
+        return new EventCommand(title, startDate, endDate);
 
     }
 }
