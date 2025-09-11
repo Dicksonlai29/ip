@@ -21,6 +21,11 @@ public class Memory {
     public Memory(String loc) {
         this.storageLocation = loc;
     }
+
+    public String getStorageLocation() {
+        return storageLocation;
+    }
+
     /**
      * Loads the list of tasks from the storage file.
      * <p>

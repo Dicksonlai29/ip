@@ -20,7 +20,7 @@ public class Ui {
      *
      * @param taskList the current list of tasks
      */
-    public static void printWelcomeMessage(ArrayList<Task> taskList) {
+    public static void printWelcomeMessage(ArrayList<Task> taskList, Memory memory) {
         String welcome = """
                          Hello! I'm NUSYapBot!
                          What can I do for you?
@@ -30,7 +30,7 @@ public class Ui {
                 welcome +
                 DIVIDER);
 
-        printTaskList(taskList);
+        printTaskList(taskList, memory);
     }
 
     /**
@@ -38,8 +38,8 @@ public class Ui {
      *
      * @param taskList the current list of tasks
      */
-    public static void printTaskList(ArrayList<Task> taskList) {
-        String tasks = (new ListCommand()).execute(taskList);
+    public static void printTaskList(ArrayList<Task> taskList, Memory memory) {
+        String tasks = (new ListCommand()).execute(taskList, memory);
         System.out.println(tasks);
     }
 

@@ -33,7 +33,7 @@ public class NUSYapBot {
 
     public void run() throws IOException, NUSYapBotException {
         boolean isRunning = true;
-        Ui.printWelcomeMessage(taskList);
+        Ui.printWelcomeMessage(taskList, memory);
 
         while (isRunning) {
             String answer = Ui.readInput();

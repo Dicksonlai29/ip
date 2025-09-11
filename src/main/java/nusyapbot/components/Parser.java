@@ -22,10 +22,10 @@ public class Parser {
             case "todo"     -> parseToDo(paramInfo);
             case "deadline" -> parseDeadline(paramInfo);
             case "event"    -> parseEvent(paramInfo);
-            case "mark"     -> new markTaskCommand();
-            case "unmark"   -> new unmarkTaskCommand();
-            case "delete"   -> new deleteCommand();
-            case "find"     -> new findCommand();
+            case "mark"     -> new markTaskCommand(paramInfo, true);
+            case "unmark"   -> new markTaskCommand(paramInfo, false);
+            case "delete"   -> new deleteCommand(paramInfo);
+            case "find"     -> new findCommand(paramInfo);
             default         -> throw new UnrecognisedCommandException();
         };
     }
