@@ -76,13 +76,14 @@ public class Memory {
 
                     command = new EventCommand(title, start, end);
                 } else {
-                    throw new NUSYapBotException("Data is stored format stored in storage.");
+                    throw new NUSYapBotException("Data is stored in wrong format in storage.");
                 }
 
                 command.execute(taskList, this);
 
 
             }
+            s.close();
         } catch (IOException | NUSYapBotException e) {
             e.printStackTrace();
         }
