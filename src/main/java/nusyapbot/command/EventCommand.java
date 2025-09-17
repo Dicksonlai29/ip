@@ -19,7 +19,6 @@ public class EventCommand extends Command {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
-
     }
     @Override
     public String execute(ArrayList<Task> taskList, Memory memory) throws IOException {
