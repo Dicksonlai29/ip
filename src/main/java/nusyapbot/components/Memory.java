@@ -48,6 +48,7 @@ public class Memory {
                     String taskLine = s.nextLine();
                     //Format: Type | T/F | title | other-var
                     String[] taskDetail = taskLine.split(" \\| ");
+                    assert taskDetail.length >= 3 : "Invalid task format in file: " + taskLine;
 
                     if (taskDetail[0].equals("T")) {
                         taskList.add(new ToDo(taskDetail[2],
