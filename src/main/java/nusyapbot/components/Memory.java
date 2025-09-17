@@ -53,7 +53,6 @@ public class Memory {
 
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
-                Command command;
                 String taskLine = s.nextLine();
                 //Format: Type | T/F | title | other-var
                 String[] taskDetail = taskLine.split(" \\| ");
