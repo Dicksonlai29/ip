@@ -31,29 +31,31 @@ public class NUSYapBot {
 
     }
 
-    public void run() throws IOException, NUSYapBotException {
+    public void run() {
         boolean isRunning = true;
         Ui.printWelcomeMessage(taskList, memory);
 
         while (isRunning) {
-            String answer = Ui.readInput();
-            // Step 1: Extract command type
-            Command command = Parser.parse(answer);
-            // Step 2: Execute the command and save response to taskList
-            String response = command.execute(taskList, memory);
-            System.out.println(response);
-            // Step 3: Check if loop should continue
-            isRunning = !command.getIsBye();
-            System.out.println(command.getIsBye());
+            try {
+                String answer = Ui.readInput();
+                // Step 1: Extract command type
+                Command command = Parser.parse(answer);
+                // Step 2: Execute the command and save response to taskList
+                String response = command.execute(taskList, memory);
+                System.out.println(response);
+                // Step 3: Check if loop should continue
+                isRunning = !command.getIsBye();
+            } catch (NUSYapBotException | IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
     public static void main(String[] args) {
-        try {
-            new NUSYapBot().run();
-        } catch (NUSYapBotException | IOException e) {
-            e.printStackTrace();
-        }
+
+        new NUSYapBot().run();
+
     }
 
     // Solution below adapted from @@author pei886

@@ -10,11 +10,15 @@ import java.util.*;
 
 public class SortCommand extends Command {
     private String field;
+    private boolean isAscending;
 
-    public SortCommand(String field) {
+    public SortCommand(String field, boolean isAscending) {
         super(false);
         this.field = field;
+        this.isAscending = isAscending;
     }
+
+
     @Override
     public String execute(
             ArrayList<Task> taskList, Memory memory) throws NUSYapBotException, IOException {
@@ -29,7 +33,12 @@ public class SortCommand extends Command {
         Comparator<Task> comparator = comparators.get(field);
 
         if (comparator == null) {
-            throw new NUSYapBotException("Invalid sort field: " + field);
+            throw new NUSYapBotException("Invalid sort field: " + field +
+                    "\n only title, status, or type is allowed.");
+        }
+
+        if (!isAscending) {
+            comparator = comparator.reversed();
         }
 
         //sort the list

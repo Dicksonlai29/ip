@@ -26,7 +26,7 @@ public class Parser {
             case "unmark"   -> new markTaskCommand(paramInfo, false);
             case "delete"   -> new deleteCommand(paramInfo);
             case "find"     -> new findCommand(paramInfo);
-            case "sort"     -> new SortCommand(paramInfo);
+            case "sort"     -> parseSort(paramInfo);
             default         -> throw new UnrecognisedCommandException();
         };
     }
@@ -70,6 +70,33 @@ public class Parser {
         LocalDateTime endDate = DateHandler.saveAsDateTime(end);
 
         return new EventCommand(title, startDate, endDate);
+
+    }
+
+    private static SortCommand parseSort(String paramInfo) 
+            throws NUSYapBotException {
+        String[] parts = paramInfo.split(" ",2);
+
+        if (parts.length < 1) {
+            throw new LackingInputException("field (title/status/type)");
+        }
+
+        String title = parts[0];
+        //default set to ascending
+        boolean isAscending = true;
+
+        if (parts.length == 2) {
+            if (parts[2].equals("asc")) {
+                isAscending = true;
+            } else if (parts[2].equals("desc")) {
+                isAscending = false;
+            } else {
+                throw new NUSYapBotException("Only asc/desc accepted for sorting order.");
+            }
+        }
+
+        return new SortCommand(title, isAscending);
+
 
     }
 }

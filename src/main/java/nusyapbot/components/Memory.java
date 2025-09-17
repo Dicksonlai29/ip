@@ -81,7 +81,6 @@ public class Memory {
                     throw new NUSYapBotException("Data is stored in wrong format in storage.");
                 }
 
-
             }
             s.close();
         } catch (IOException | NUSYapBotException e) {
