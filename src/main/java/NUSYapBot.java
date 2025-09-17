@@ -29,12 +29,12 @@ public class NUSYapBot {
     public NUSYapBot() {
         taskList = new ArrayList<>();
         memory = new Memory(STORAGE_PATH);
+        taskList = memory.getTaskList();
 
     }
 
     public void run() throws IOException, NUSYapBotException {
         boolean isRunning = true;
-        taskList = memory.getTaskList();
         Ui.printWelcomeMessage(taskList, memory);
 
         while (isRunning) {
