@@ -1,5 +1,10 @@
 package nusyapbot.components;
 //tasktype
+import nusyapbot.command.Command;
+import nusyapbot.command.DeadlineCommand;
+import nusyapbot.command.EventCommand;
+import nusyapbot.command.ToDoCommand;
+import nusyapbot.exceptions.NUSYapBotException;
 import nusyapbot.tasktype.Task;
 import nusyapbot.tasktype.ToDo;
 import nusyapbot.tasktype.Deadline;
@@ -42,41 +47,47 @@ public class Memory {
         try {
             //load the task list saved previously
             File f = new File(storageLocation);
-            if (!f.createNewFile()) {
-                Scanner s = new Scanner(f);
-                while (s.hasNext()) {
-                    String taskLine = s.nextLine();
-                    //Format: Type | T/F | title | other-var
-                    String[] taskDetail = taskLine.split(" \\| ");
-                    assert taskDetail.length >= 3 : "Invalid task format in file: " + taskLine;
-
-                    if (taskDetail[0].equals("T")) {
-                        taskList.add(new ToDo(taskDetail[2],
-                                taskDetail[1].equals("T")));
-
-                    } else if (taskDetail[0].equals("D")) {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                        LocalDateTime date = LocalDateTime.parse(taskDetail[3], formatter);
-
-                        taskList.add(new Deadline(taskDetail[2],
-                                date, taskDetail[1].equals("T")));
-
-                    } else if (taskDetail[0].equals("E")) {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                        LocalDateTime start = LocalDateTime.parse(taskDetail[3], formatter);
-                        LocalDateTime end = LocalDateTime.parse(taskDetail[4], formatter);
-
-                        taskList.add(new Event(taskDetail[2], start, end, taskDetail[1].equals("T")));
-                    }
-
-                }
+            if (f.createNewFile()) {
+                return taskList;
             }
-        } catch (IOException e) {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                Command command;
+                String taskLine = s.nextLine();
+                //Format: Type | T/F | title | other-var
+                String[] taskDetail = taskLine.split(" \\| ");
+                assert taskDetail.length >= 3 : "Invalid task format in file: " + taskLine;
+
+                String title = taskDetail[2];
+
+                if (taskDetail[0].equals("T")) {
+                    command = new ToDoCommand(title);
+
+                } else if (taskDetail[0].equals("D")) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                    LocalDateTime date = LocalDateTime.parse(taskDetail[3], formatter);
+
+                    command = new DeadlineCommand(title, date);
+
+                } else if (taskDetail[0].equals("E")) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                    LocalDateTime start = LocalDateTime.parse(taskDetail[3], formatter);
+                    LocalDateTime end = LocalDateTime.parse(taskDetail[4], formatter);
+
+                    command = new EventCommand(title, start, end);
+                } else {
+                    throw new NUSYapBotException("Data is stored format stored in storage.");
+                }
+
+                command.execute(taskList, this);
+
+
+            }
+        } catch (IOException | NUSYapBotException e) {
             e.printStackTrace();
         }
         return taskList;
     }
-
     /**
      * Formatting the task object into String and write to file
      * <p>
