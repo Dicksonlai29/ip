@@ -24,8 +24,10 @@ public class EventCommand extends Command {
     @Override
     public String execute(ArrayList<Task> taskList, Memory memory) throws IOException {
         Task newTask = new Event(title, startDate, endDate);
+        int sizeBeforeAdd = taskList.size();
         taskList.add(newTask);
         memory.addNewTask(newTask);
+        assert taskList.size() == sizeBeforeAdd + 1: "taskList should increment by 1 only";
         return "Got it. I've added this task: \n" +
                 newTask + "\n" +
                 "Now you have "+ taskList.size() +" tasks in the list." + "\n";
