@@ -1,6 +1,5 @@
 //components
 import nusyapbot.command.Command;
-import nusyapbot.components.CommandHandler;
 import nusyapbot.components.Memory;
 import nusyapbot.components.Parser;
 import nusyapbot.components.Ui;
@@ -10,7 +9,6 @@ import nusyapbot.tasktype.Task;
 //exceptions
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import java.io.IOException;
 
