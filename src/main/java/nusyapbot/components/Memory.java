@@ -35,40 +35,44 @@ public class Memory {
      *
      * @return an ArrayList containing all tasks read from the file
      */
-    public ArrayList<Task> getTaskList() throws IOException {
+    public ArrayList<Task> getTaskList() {
         //save task from hard disk to an arrayList
         ArrayList<Task> taskList = new ArrayList<>();
-        
-        //load the task list saved previously
-        File f = new File(storageLocation);
-        if (!f.createNewFile()) {
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String taskLine = s.nextLine();
-                //Format: Type | T/F | title | other-var
-                String[] taskDetail = taskLine.split(" \\| ");
-                
-                if (taskDetail[0].equals("T")) {
-                    taskList.add(new ToDo(taskDetail[2], 
-                            taskDetail[1].equals("T")));
-                    
-                } else if (taskDetail[0].equals("D")) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                    LocalDateTime date = LocalDateTime.parse(taskDetail[3], formatter);
-                    
-                    taskList.add(new Deadline(taskDetail[2], 
-                            date, taskDetail[1].equals("T")));
 
-                } else if (taskDetail[0].equals("E")) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                    LocalDateTime start = LocalDateTime.parse(taskDetail[3], formatter);
-                    LocalDateTime end = LocalDateTime.parse(taskDetail[4], formatter);
+        try {
+            //load the task list saved previously
+            File f = new File(storageLocation);
+            if (!f.createNewFile()) {
+                Scanner s = new Scanner(f);
+                while (s.hasNext()) {
+                    String taskLine = s.nextLine();
+                    //Format: Type | T/F | title | other-var
+                    String[] taskDetail = taskLine.split(" \\| ");
 
-                    taskList.add(new Event(taskDetail[2], start, end, taskDetail[1].equals("T")));
+                    if (taskDetail[0].equals("T")) {
+                        taskList.add(new ToDo(taskDetail[2],
+                                taskDetail[1].equals("T")));
+
+                    } else if (taskDetail[0].equals("D")) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        LocalDateTime date = LocalDateTime.parse(taskDetail[3], formatter);
+
+                        taskList.add(new Deadline(taskDetail[2],
+                                date, taskDetail[1].equals("T")));
+
+                    } else if (taskDetail[0].equals("E")) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        LocalDateTime start = LocalDateTime.parse(taskDetail[3], formatter);
+                        LocalDateTime end = LocalDateTime.parse(taskDetail[4], formatter);
+
+                        taskList.add(new Event(taskDetail[2], start, end, taskDetail[1].equals("T")));
+                    }
+
                 }
-                
             }
-        } 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return taskList;
     }
 

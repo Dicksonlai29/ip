@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private NUSYapBot nusYapBot = new NUSYapBot();
+
     @Override
     public void start(Stage stage) {
         try {
