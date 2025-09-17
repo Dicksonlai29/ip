@@ -26,6 +26,7 @@ public class Parser {
             case "unmark"   -> new markTaskCommand(paramInfo, false);
             case "delete"   -> new deleteCommand(paramInfo);
             case "find"     -> new findCommand(paramInfo);
+            case "sort"     -> new SortCommand(paramInfo);
             default         -> throw new UnrecognisedCommandException();
         };
     }
