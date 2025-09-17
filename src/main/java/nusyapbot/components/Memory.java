@@ -50,6 +50,7 @@ public class Memory {
             if (f.createNewFile()) {
                 return taskList;
             }
+
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 Command command;
@@ -61,25 +62,25 @@ public class Memory {
                 String title = taskDetail[2];
 
                 if (taskDetail[0].equals("T")) {
-                    command = new ToDoCommand(title);
+                    taskList.add(new ToDo(taskDetail[2],
+                            taskDetail[1].equals("T")));
 
                 } else if (taskDetail[0].equals("D")) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
                     LocalDateTime date = LocalDateTime.parse(taskDetail[3], formatter);
 
-                    command = new DeadlineCommand(title, date);
+                    taskList.add(new Deadline(taskDetail[2],
+                            date, taskDetail[1].equals("T")));
 
                 } else if (taskDetail[0].equals("E")) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
                     LocalDateTime start = LocalDateTime.parse(taskDetail[3], formatter);
                     LocalDateTime end = LocalDateTime.parse(taskDetail[4], formatter);
 
-                    command = new EventCommand(title, start, end);
+                    taskList.add(new Event(taskDetail[2], start, end, taskDetail[1].equals("T")));
                 } else {
                     throw new NUSYapBotException("Data is stored in wrong format in storage.");
                 }
-
-                command.execute(taskList, this);
 
 
             }
