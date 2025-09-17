@@ -22,8 +22,11 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(ArrayList<Task> taskList, Memory memory) throws IOException {
         Task newTask = new Deadline(title, date);
+        int taskListSizeBefore = taskList.size();
         taskList.add(newTask);
         memory.addNewTask(newTask);
+        assert taskList.size() == taskListSizeBefore + 1 : "The number of task" +
+                "in the task list is supposed to be incremented by exactly 1.";
         return "Got it. I've added this task: \n" +
                 newTask + "\n" +
                 "Now you have "+ taskList.size() +" tasks in the list." + "\n";
