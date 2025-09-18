@@ -20,7 +20,8 @@ public class MemoryTest {
         taskList.add(new ToDo(("text def")));
         taskList.add(new ToDo(("text ghi")));
 
-        assertEquals(taskList, memory.getTaskList());
+        assertEquals(taskList.toString(),
+                memory.getTaskList().toString());
     }
 
 }
