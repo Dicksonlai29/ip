@@ -7,10 +7,10 @@ import nusyapbot.tasktype.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class findCommand extends Command {
+public class FindCommand extends Command {
     private String keyword;
 
-    public findCommand(String keyword) {
+    public FindCommand(String keyword) {
         super(false);
         this.keyword = keyword;
     }

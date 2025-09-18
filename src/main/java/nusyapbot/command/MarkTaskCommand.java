@@ -10,11 +10,11 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
-public class markTaskCommand extends Command{
+public class MarkTaskCommand extends Command{
     private String taskNumber;
     private boolean status;
 
-    public markTaskCommand(String taskNumber, boolean status) {
+    public MarkTaskCommand(String taskNumber, boolean status) {
         super(false);
         this.taskNumber = taskNumber;
         this.status = status;

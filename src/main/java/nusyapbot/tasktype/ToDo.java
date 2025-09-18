@@ -11,6 +11,7 @@ public class ToDo extends Task {
         this.setIsCompleted(isCompleted);
     }
 
+    @Override
     public String toString() {
         return "[T]" + (this.getIsCompleted() ? "[X] " : "[ ] ") +
                 this.getTitle();

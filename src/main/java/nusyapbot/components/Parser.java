@@ -4,8 +4,6 @@ import nusyapbot.command.*;
 import nusyapbot.exceptions.LackingInputException;
 import nusyapbot.exceptions.NUSYapBotException;
 import nusyapbot.exceptions.UnrecognisedCommandException;
-import nusyapbot.tasktype.Deadline;
-import nusyapbot.tasktype.ToDo;
 
 import java.time.LocalDateTime;
 
@@ -22,10 +20,10 @@ public class Parser {
             case "todo"     -> parseToDo(paramInfo);
             case "deadline" -> parseDeadline(paramInfo);
             case "event"    -> parseEvent(paramInfo);
-            case "mark"     -> new markTaskCommand(paramInfo, true);
-            case "unmark"   -> new markTaskCommand(paramInfo, false);
-            case "delete"   -> new deleteCommand(paramInfo);
-            case "find"     -> new findCommand(paramInfo);
+            case "mark"     -> new MarkTaskCommand(paramInfo, true);
+            case "unmark"   -> new MarkTaskCommand(paramInfo, false);
+            case "delete"   -> new DeleteCommand(paramInfo);
+            case "find"     -> new FindCommand(paramInfo);
             case "sort"     -> parseSort(paramInfo);
             default         -> throw new UnrecognisedCommandException();
         };

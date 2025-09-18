@@ -28,6 +28,7 @@ public class Event extends Task {
         return this.endDate;
     }
 
+    @Override
     public String toString() {
         String formattedStartDate = this.startDate.format(formatter);
         String formattedEndDate = this.endDate.format(formatter);

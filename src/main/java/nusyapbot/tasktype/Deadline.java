@@ -27,6 +27,7 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    @Override
     public String toString() {
         String formattedDeadline = this.deadline.format(formatter);
         return "[D]" + (this.getIsCompleted() ? "[X] " : "[ ] ") +

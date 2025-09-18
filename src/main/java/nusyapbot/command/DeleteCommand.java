@@ -7,14 +7,13 @@ import nusyapbot.exceptions.NUSYapBotException;
 import nusyapbot.tasktype.Task;
 
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
-public class deleteCommand extends Command {
+public class DeleteCommand extends Command {
     private String taskNumber;
     private boolean status;
 
-    public deleteCommand(String taskNumber) {
+    public DeleteCommand(String taskNumber) {
         super(false);
         this.taskNumber = taskNumber;
         this.status = status;
