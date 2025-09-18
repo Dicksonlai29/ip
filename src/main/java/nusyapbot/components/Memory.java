@@ -1,9 +1,5 @@
 package nusyapbot.components;
-//tasktype
-import nusyapbot.command.Command;
-import nusyapbot.command.DeadlineCommand;
-import nusyapbot.command.EventCommand;
-import nusyapbot.command.ToDoCommand;
+
 import nusyapbot.exceptions.NUSYapBotException;
 import nusyapbot.tasktype.Task;
 import nusyapbot.tasktype.ToDo;
@@ -33,7 +29,6 @@ public class Memory {
 
     /**
      * Loads the list of tasks from the storage file.
-     * <p>
      * If the file exists, it will read each line and convert them
      * back into Task objects (ToDo, Deadline, or Event).
      * If the file does not exist, a new empty list is returned.
@@ -90,7 +85,6 @@ public class Memory {
     }
     /**
      * Formatting the task object into String and write to file
-     * <p>
      * The task is written in a specific format depending on its type
      * (ToDo, Deadline, or Event).
      *
@@ -136,11 +130,10 @@ public class Memory {
 
     /**
      * Overwrite the existing storage file with the current list of task.
-     * <p>
      * The task is written in a specific format depending on its type
      * (ToDo, Deadline, or Event).
      *
-     * @param Task the task object to be added
+     * @param taskList the new taskList that will overwrite the existing list of tasks.
      * @throws IOException if the file cannot be written
      */
     public void rewriteMemory(ArrayList<Task> taskList) throws IOException {

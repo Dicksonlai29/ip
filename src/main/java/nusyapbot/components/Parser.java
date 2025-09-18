@@ -53,8 +53,8 @@ public class Parser {
 
     }
 
-    private static EventCommand parseEvent(String paramInfo)
-            throws NUSYapBotException {
+    private static EventCommand parseEvent(
+            String paramInfo) throws NUSYapBotException {
         String[] parts = paramInfo.split("/from",2);
         if (parts.length < 2) {
             throw new LackingInputException("title or startTime or endTime");
@@ -94,7 +94,5 @@ public class Parser {
         }
 
         return new SortCommand(title, isAscending);
-
-
     }
 }

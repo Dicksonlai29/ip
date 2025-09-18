@@ -53,9 +53,7 @@ public class NUSYapBot {
     }
 
     public static void main(String[] args) {
-
         new NUSYapBot().run();
-
     }
 
     // Solution below adapted from @@author pei886
