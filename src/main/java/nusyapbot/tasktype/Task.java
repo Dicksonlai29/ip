@@ -7,7 +7,7 @@ public class Task {
     private String title;
     protected boolean isCompleted;
     private char type;
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yy HH:mm");
 
 
     public Task(String title) {
