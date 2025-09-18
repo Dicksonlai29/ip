@@ -43,17 +43,4 @@ public class Ui {
         System.out.println(tasks);
     }
 
-    /**
-     * Prints a message to confirm that a task has been added.
-     *
-     * @param taskList the current list of tasks
-     */
-    public static void printAddTaskMessage(ArrayList<Task> taskList) {
-        int numOfTask = taskList.size();
-        System.out.println( "_________________________________" + "\n" +
-                "Got it. I've added this task: " +
-                taskList.get(numOfTask - 1) + "\n" +
-                "Now you have "+ numOfTask +" tasks in the list." + "\n" +
-                "_________________________________");
-    };
 }
