@@ -48,7 +48,7 @@ public class NUSYapBot {
                 // Step 3: Check if loop should continue
                 isRunning = !command.getIsBye();
             } catch (NUSYapBotException | IOException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
 
         }

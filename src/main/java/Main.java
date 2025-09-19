@@ -42,6 +42,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setBot(nusYapBot);
             stage.show();
         } catch (IOException e) {
+            System.out.println("We run into some problem while loading the FXML:");
             e.printStackTrace();
         }
     }
