@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Handles all the retrieval and writing of data to permanent data storage.
+ */
 public class Memory {
     private String storageLocation;
 
@@ -79,7 +82,8 @@ public class Memory {
             }
             s.close();
         } catch (IOException | NUSYapBotException e) {
-            e.printStackTrace();
+            System.out.println("We run into some error during retrieval/writing of data:");
+            System.out.println(e.getMessage());
         }
         return taskList;
     }

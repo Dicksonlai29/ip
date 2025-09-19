@@ -48,7 +48,10 @@ public class NUSYapBot {
                 System.out.println(response);
                 // Step 3: Check if loop should continue
                 isRunning = !command.getIsBye();
-            } catch (NUSYapBotException | IOException e) {
+            } catch (NUSYapBotException e) {
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println("We run into some error during retrieval/writing of data:");
                 System.out.println(e.getMessage());
             }
 
