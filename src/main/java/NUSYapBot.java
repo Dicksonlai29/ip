@@ -1,4 +1,5 @@
 //components
+import javafx.application.Platform;
 import nusyapbot.command.Command;
 import nusyapbot.components.Memory;
 import nusyapbot.components.Parser;
@@ -69,6 +70,11 @@ public class NUSYapBot {
             // Step 2: Execute the command and save response
             // to taskList & memory
             String response = command.execute(taskList, memory);
+
+            // if it is a bye command, exit the GUI
+            if (command.getIsBye()) {
+                Platform.exit();
+            }
             // Step 4: Return response to UI
             return response;
         } catch (NUSYapBotException | IOException e) {
