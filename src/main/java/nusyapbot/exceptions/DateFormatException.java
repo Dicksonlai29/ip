@@ -1,5 +1,8 @@
 package nusyapbot.exceptions;
 
+/**
+ * Represents an exception thrown when a date string does not match any of the accepted formats.
+ */
 public class DateFormatException extends NUSYapBotException {
     public DateFormatException() {
         super("\nDate is not in any of the following form:\n" +

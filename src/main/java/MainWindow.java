@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for main GUI
+ * Control the main GUI
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,6 +24,12 @@ public class MainWindow extends AnchorPane {
     private Image userImg = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/yapbot.png"));
 
+    /**
+     * Initializes the main window by binding the vertical scroll value of the scroll pane
+     * to the height property of the dialog container. 
+     * This ensures that the scroll pane automatically scrolls to the bottom as 
+     * new content is added to the dialog container.
+     */
     @FXML
     public void init() {
         scrollPane.vvalueProperty().bind(diaCont.heightProperty());

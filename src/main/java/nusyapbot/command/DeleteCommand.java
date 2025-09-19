@@ -9,14 +9,20 @@ import nusyapbot.tasktype.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a command to delete a task from the task list.
+ * <p>
+ * When executed, the command removes the corresponding
+ * task from the provided task list, and updates the memory storage. If the input is
+ * invalid or the task number does not exist, appropriate exceptions are thrown.
+ */
 public class DeleteCommand extends Command {
     private String taskNumber;
-    private boolean status;
+
 
     public DeleteCommand(String taskNumber) {
         super(false);
         this.taskNumber = taskNumber;
-        this.status = status;
     }
 
     @Override

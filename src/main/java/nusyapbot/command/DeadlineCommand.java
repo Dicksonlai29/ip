@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Represents a command to create a Deadline-typed task.
+ * When executed, this command adds the task to the taskList and permanent memory,
+ * then return a message to the caller.
+ */
 public class DeadlineCommand extends Command {
     private String title;
     private LocalDateTime date;
@@ -19,6 +24,7 @@ public class DeadlineCommand extends Command {
         this.date = date;
 
     }
+    
     @Override
     public String execute(ArrayList<Task> taskList, Memory memory) throws IOException {
         Task newTask = new Deadline(title, date);

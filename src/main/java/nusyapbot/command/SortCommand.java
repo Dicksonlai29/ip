@@ -18,7 +18,6 @@ public class SortCommand extends Command {
         this.isAscending = isAscending;
     }
 
-
     @Override
     public String execute(
             ArrayList<Task> taskList, Memory memory) throws NUSYapBotException, IOException {

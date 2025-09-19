@@ -1,7 +1,8 @@
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * Serves as the entry point to NUSYapBot when launching
+ * the app.
  */
 
 public class Launcher {

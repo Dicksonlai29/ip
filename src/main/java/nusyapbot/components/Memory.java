@@ -84,7 +84,7 @@ public class Memory {
         return taskList;
     }
     /**
-     * Formatting the task object into String and write to file
+     * Formats the task object into String and write to file
      * The task is written in a specific format depending on its type
      * (ToDo, Deadline, or Event).
      *
@@ -129,7 +129,7 @@ public class Memory {
     }
 
     /**
-     * Overwrite the existing storage file with the current list of task.
+     * Overwrites the existing storage file with the current list of task.
      * The task is written in a specific format depending on its type
      * (ToDo, Deadline, or Event).
      *

@@ -7,6 +7,15 @@ import nusyapbot.tasktype.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+/**
+ * Represents a command to find tasks in the task list that contain a specified keyword in their title.
+ * <p>
+ * The {@code FindCommand} searches through the provided list of tasks and collects all tasks whose titles
+ * contain the given keyword. It then returns a message listing all matching tasks, or a message indicating
+ * that no matches were found.
+ * </p>
+ */
 public class FindCommand extends Command {
     private String keyword;
 
@@ -14,6 +23,7 @@ public class FindCommand extends Command {
         super(false);
         this.keyword = keyword;
     }
+    
     @Override
     public String execute(ArrayList<Task> taskList, Memory memory)
             throws NUSYapBotException, IOException {

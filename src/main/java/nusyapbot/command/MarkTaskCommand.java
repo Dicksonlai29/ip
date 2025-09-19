@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
+/**
+ * Command to mark a task as completed or not.
+ * When executed, it updates both the in-memory list and persistent storage,
+ * then return a message to user if successful, else, throw an error.
+ */
 public class MarkTaskCommand extends Command{
     private String taskNumber;
     private boolean status;

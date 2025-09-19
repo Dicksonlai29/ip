@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Represents a command to create a Event-typed task.
+ * When executed, this command adds the task to the taskList and permanent memory,
+ * then return a message to the caller.
+ */
 public class EventCommand extends Command {
     private String title;
     private LocalDateTime startDate;

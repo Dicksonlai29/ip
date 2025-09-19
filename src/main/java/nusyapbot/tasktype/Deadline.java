@@ -2,6 +2,11 @@ package nusyapbot.tasktype;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a task with a specific deadline.
+ * Extends the {@link Task} class and adds a {@link LocalDateTime} deadline.
+ * The type of this task is set to 'D'.
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
 

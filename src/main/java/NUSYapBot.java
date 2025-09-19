@@ -30,7 +30,9 @@ public class NUSYapBot {
         taskList = memory.getTaskList();
 
     }
-
+    /**
+     * Runs the main execution loop of NUSYapBot
+     */
     public void run() {
         boolean isRunning = true;
         Ui.printWelcomeMessage(taskList, memory);

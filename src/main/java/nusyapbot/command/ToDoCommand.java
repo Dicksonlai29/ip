@@ -1,12 +1,18 @@
 package nusyapbot.command;
 
 import nusyapbot.components.Memory;
+import nusyapbot.exceptions.NUSYapBotException;
 import nusyapbot.tasktype.Task;
 import nusyapbot.tasktype.ToDo;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a command to create a To Do-typed task.
+ * When executed, this command adds the task to the taskList and permanent memory,
+ * then return a message to the caller.
+ */
 public class ToDoCommand extends Command {
     private String title;
 
@@ -15,8 +21,10 @@ public class ToDoCommand extends Command {
         this.title = title;
 
     }
+
     @Override
-    public String execute(ArrayList<Task> taskList, Memory memory) throws IOException {
+    public String execute(
+        ArrayList<Task> taskList, Memory memory) throws NUSYapBotException, IOException {
         Task newTask = new ToDo(title);
         int taskListSizeBefore = taskList.size();
         taskList.add(newTask);

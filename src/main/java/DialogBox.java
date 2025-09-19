@@ -12,6 +12,14 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
+/**
+ * Represents a custom JavaFX HBox used for displaying dialog messages.
+ * <p>
+ * It loads its layout from an FXML file and provides methods to create dialog boxes
+ * for both user and bot messages, with the ability to flip the arrangement of the image
+ * and text for bot dialogs.
+ * </p>
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label text;
