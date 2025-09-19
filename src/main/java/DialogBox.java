@@ -38,6 +38,7 @@ public class DialogBox extends HBox {
 
         text.setText(s);
         img.setImage(i);
+        this.setAlignment(Pos.TOP_RIGHT);
     }
 
     /**

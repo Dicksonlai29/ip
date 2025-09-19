@@ -16,7 +16,7 @@
          <padding>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
          </padding></Label>
-         <StackPane alignment="CENTER" prefHeight="99.0" prefWidth="99.0">
+         <StackPane alignment="TOP_CENTER" prefHeight="99.0" prefWidth="99.0">
             <ImageView fx:id="img" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
              <clip>
                  <Circle centerX="49.5" centerY="49.5" radius="50" />
